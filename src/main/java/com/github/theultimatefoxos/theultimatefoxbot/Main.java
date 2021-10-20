@@ -26,10 +26,12 @@ public class Main {
 
 		String token;
 		String prefix;
+		String discord_invite;
 
 		if (parser.is_option("--no-cfg")) {
 			token = System.getenv("DISCORD_TOKEN");
 			prefix = System.getenv("DISCORD_PREFIX");
+			discord_invite = System.getenv("DISCORD_INVITE");
 		} else {
 			String config_file = parser.consume_option("--config", "config.json");
 			if (!FileUtils.getFileExists(config_file)) {
@@ -65,9 +67,10 @@ public class Main {
 
 			token = config_root.get("token").asString();
 			prefix = config_root.get("prefix").asString();
+			discord_invite = config_root.get("discord_invite").asString();
 		}
 
-		Discord.init(token, prefix);
+		Discord.init(token, prefix, discord_invite);
 
 		Discord.discord.receiver.tiny_crash_report = parser.is_option("--tiny-crash");
 
@@ -76,6 +79,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("nick", new NickCommand());
 		Discord.discord.commandManager.addCommand("wikipedia", new WikipediaCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
+		Discord.discord.commandManager.addCommand("invite", new InviteCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();

@@ -10,21 +10,23 @@ public class Discord {
 	// ------------------- static fields -------------------
 	public static Discord discord;
 	
-	public static void init(String token, String prefix) throws LoginException, InterruptedException {
-		Discord.discord = new Discord(token, prefix);
+	public static void init(String token, String prefix, String discord_invite) throws LoginException, InterruptedException {
+		Discord.discord = new Discord(token, prefix, discord_invite);
 	}
 	// -----------------------------------------------------
 
 	String current_rp;
 
 	private String token;
+	public String discord_invite;
 	public JDA jda;
 	public CommandManager commandManager;
 
 	public DiscordReceiver receiver;
 
-	private Discord(String token, String prefix) throws LoginException, InterruptedException {
+	private Discord(String token, String prefix, String discord_invite) throws LoginException, InterruptedException {
 		this.token = token;
+		this.discord_invite = discord_invite;
 
 		JDABuilder jdaBuilder = JDABuilder.createDefault(this.token);
         jda = jdaBuilder.build();
