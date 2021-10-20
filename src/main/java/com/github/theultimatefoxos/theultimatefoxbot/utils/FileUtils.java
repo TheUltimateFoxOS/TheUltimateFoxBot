@@ -1,12 +1,6 @@
 package com.github.theultimatefoxos.theultimatefoxbot.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
+import java.io.*;
 
 public class FileUtils {
 	public static String readFile(String file_name) throws IOException {
@@ -52,5 +46,10 @@ public class FileUtils {
 		}
 
 		return file_name.substring(dot + 1);
+	}
+
+	public static boolean getFileExists(String file_name) {
+		File file = new File(file_name);
+		return file.exists();
 	}
 }

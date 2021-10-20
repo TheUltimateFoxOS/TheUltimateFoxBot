@@ -240,5 +240,5 @@ nbdist/
 ._DS_Strore
 
 #Bot files
-config.json
-perms.json
+/config.json
+/perms.json

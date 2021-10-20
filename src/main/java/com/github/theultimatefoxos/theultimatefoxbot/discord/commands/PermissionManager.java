@@ -25,7 +25,7 @@ public class PermissionManager {
 				JsonNode user_node = root.get(user);
 				String[] permissions = user_node.asStringArray();
 
-				return ArrayUtils.contains(permissions, permission);
+				return ArrayUtils.contains(permissions, permission) || ArrayUtils.contains(permissions, "admin");
 			} else 	{
 				JsonNode user_node = JsonNode.stringArray();
 				root.set(user, user_node);

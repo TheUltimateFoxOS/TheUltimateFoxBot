@@ -5,8 +5,16 @@ import com.github.theultimatefoxos.theultimatefoxbot.plugin.PluginsLoader;
 import com.github.theultimatefoxos.theultimatefoxbot.utils.ArgParser;
 import com.github.theultimatefoxos.theultimatefoxbot.utils.FileUtils;
 import com.github.theultimatefoxos.theultimatefoxbot.discord.commands.impl.*;
+
 import net.shadew.json.Json;
 import net.shadew.json.JsonNode;
+
+import com.google.common.io.Resources;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
 	public static PluginsLoader pluginsLoader;
@@ -24,6 +32,32 @@ public class Main {
 			prefix = System.getenv("DISCORD_PREFIX");
 		} else {
 			String config_file = parser.consume_option("--config", "config.json");
+			if (!FileUtils.getFileExists(config_file)) {
+				String contents = null;
+				try {
+					URL url = Resources.getResource("config.json");
+					contents = Resources.toString(url, StandardCharsets.UTF_8);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				if (contents == null) {
+					System.out.print("[ERROR] Your jar file is corrupted, try re-building it or contact a developer.");
+					return;
+				}
+
+				try (FileWriter file = new FileWriter("config.json")) {
+					file.write(contents);
+					file.flush();
+
+				} catch (IOException e) {
+					System.out.print("[ERROR] Unable to save the config.");
+					e.printStackTrace();
+				}
+
+				System.out.print("[ERROR] Please set a token and a prefix in \"config.json\"\n");
+				return;
+			}
 			String config = FileUtils.readFile(config_file);
 
 			Json config_json = Json.json();
