@@ -80,6 +80,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("wikipedia", new WikipediaCommand());
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 		Discord.discord.commandManager.addCommand("invite", new InviteCommand());
+		Discord.discord.commandManager.addCommand("windows", new WindowsCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
