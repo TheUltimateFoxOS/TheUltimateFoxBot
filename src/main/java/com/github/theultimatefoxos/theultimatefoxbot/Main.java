@@ -81,6 +81,7 @@ public class Main {
 		Discord.discord.commandManager.addCommand("role", new RoleCommand());
 		Discord.discord.commandManager.addCommand("invite", new InviteCommand());
 		Discord.discord.commandManager.addCommand("windows", new WindowsCommand());
+		Discord.discord.commandManager.addCommand("site", new SiteCommand());
 
 		pluginsLoader = new PluginsLoader("plugins");
 		pluginsLoader.load_all();
