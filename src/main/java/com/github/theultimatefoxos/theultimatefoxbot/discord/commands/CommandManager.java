@@ -17,11 +17,11 @@ public class CommandManager {
 	}
 
 	public void onCommand(CommandEvent event) throws Exception {
-		if (!event.command.startsWith(prefix)) {
+		if (!event.command.toLowerCase().startsWith(prefix)) {
 			return;
 		}
 		
-		if (event.command.equals(prefix + "help")) {
+		if (event.command.toLowerCase().equals(prefix + "help")) {
 			switch (event.args.length) {
 				case 0:
 					{
@@ -39,7 +39,7 @@ public class CommandManager {
 
 				case 1:
 					{
-						if (!event.args[0].startsWith(Discord.discord.commandManager.prefix))
+						if (!event.args[0].toLowerCase().startsWith(Discord.discord.commandManager.prefix))
 						{
 							event.args[0] = Discord.discord.commandManager.prefix + event.args[0];
 						}
