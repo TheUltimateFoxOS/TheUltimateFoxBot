@@ -8,30 +8,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class BaseApi {
-	public String request(String _url) throws IOException {
-		URL url = new URL(_url);
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+	public String request(String url) throws IOException {
+		HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 
 		con.setRequestMethod("GET");
 		con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 		con.setRequestProperty("Accept", "application/json");
 		
-		String response = "";
-
+		StringBuilder response = new StringBuilder();
 		for (byte b : con.getInputStream().readAllBytes()) {
-			response += (char) b;
+			response.append((char) b);
 		}
 
 		con.getInputStream().close();
 		con.disconnect();
 
-		return response;
+		return response.toString();
 	}
 
-	public void download(String path, String _url) throws IOException {
-		URL url = new URL(_url);
+	public void download(String path, String url) throws IOException {
 		File destination = new File(path);
-		BufferedInputStream in = new BufferedInputStream(url.openStream());
+		BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
 
 		FileOutputStream fileOutputStream = new FileOutputStream(destination);
 		

@@ -1,0 +1,10 @@
+discord-invite: "https://discord.gg/qfYBHFWDcK"
+
+bot:
+  token: "TOKEN"
+  command-prefix: "fox!"
+
+roles:
+  admins:
+    - 699180625038540832
+    - 584344177257480192
